@@ -1,50 +1,29 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Anneye Özel</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8" />
+  <title>Rapor Sistemi</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
+  <header>
+    <img
+      src="https://tr.rbxcdn.com/180DAY-c3bd564c936a23b2748544143e6f4d65/500/280/Image/Jpeg/noFilter"
+      alt="Banner"
+      class="banner"
+    />
+  </header>
 
-  <div class="container">
-    <div class="page active" id="page1">
-      <h1>Anne, İyi ki Varsın ❤️</h1>
-      <img src="https://i.imgur.com/uFdep9P.jpeg" alt="Annem" class="photo">
-      <p>Sen benim en kıymetlimsin...</p>
-      <button onclick="nextPage()">Devam Et</button>
+  <div class="background-overlay"></div>
+
+  <main>
+    <div class="buttons">
+      <button id="addReportBtn">Rapor Ekle</button>
+      <button id="clearReportsBtn">Raporları Temizle</button>
     </div>
 
-    <div class="page" id="page2">
-      <h1>Senin Sevgin Hep Yanımda 🌸</h1>
-      <p>Hayatım boyunca senin sevginle büyüdüm.</p>
-      <button onclick="nextPage()">Devam Et</button>
-    </div>
-
-    <div class="page" id="page3">
-      <h1>Fotoğraf Galerisi 📸</h1>
-      <div class="gallery">
-        <img src="https://i.imgur.com/uFdep9P.jpeg" alt="Anne">
-        <img src="https://i.imgur.com/uFdep9P.jpeg" alt="Anne">
-        <img src="https://i.imgur.com/uFdep9P.jpeg" alt="Anne">
-      </div>
-      <button onclick="nextPage()">Devam Et</button>
-    </div>
-
-    <div class="page" id="page4">
-      <h1>Teşekkürler 💖</h1>
-      <p>İyi ki varsın annem. Seni çok seviyorum!</p>
-      <div class="footer">Üvey oğlun: Efe 😄</div>
-    </div>
-  </div>
-
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
-  </audio>
-
-  <canvas id="hearts"></canvas>
-
-  <script src="script.js"></script>
+    <div id="reportList" class="report-list"></div>
+  </main>
 </body>
 </html>
