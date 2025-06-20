@@ -20,10 +20,32 @@
   <main>
     <div class="buttons">
       <button id="addReportBtn">Rapor Ekle</button>
-      <button id="clearReportsBtn">Raporları Temizle</button>
+      <button id="clearReportsBtn">Tüm Raporları Temizle</button>
     </div>
 
     <div id="reportList" class="report-list"></div>
   </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2>Rapor Ekle</h2>
+      <form id="reportForm">
+        <label>Roblox İsim:<br /><input type="text" name="robloxName" required /></label>
+        <label>DC İsim:<br /><input type="text" name="dcName" required /></label>
+        <label>Kaçıncı Raporum:<br /><input type="number" name="reportNumber" min="1" required /></label>
+        <label>İcraatler:<br /><textarea name="actions" rows="2" required></textarea></label>
+        <label>Yaptığım Etkinlik Sayısı:<br /><input type="number" name="eventCount" min="0" required /></label>
+        <label>Gün İçerisinde Aktiflik Süresi:<br /><input type="text" name="activeTime" required placeholder="Örnek: 3 saat" /></label>
+        <label>Bulunduğum Birim:<br /><input type="text" name="unit" required /></label>
+        <label>Kanıt/SS:<br /><input type="text" name="proof" placeholder="Link veya açıklama" /></label>
+        <label>Tarih:<br /><input type="date" name="date" required /></label>
+        <div class="modal-buttons">
+          <button type="submit">Kaydet</button>
+          <button type="button" id="cancelBtn">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
