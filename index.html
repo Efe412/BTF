@@ -1,51 +1,77 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rapor Sistemi</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yüksek İdare {Alt Y.} Bilgi Paneli</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <img
-      src="https://tr.rbxcdn.com/180DAY-c3bd564c936a23b2748544143e6f4d65/500/280/Image/Jpeg/noFilter"
-      alt="Banner"
-      class="banner"
-    />
-  </header>
 
-  <div class="background-overlay"></div>
+<header>
+  <img class="top-banner" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw4cansNuP-IOzGikUMHyWorq2DLN9iiid9_lzTfe_hZHEH3oaADnWfZDES4kTYSjIEDk&usqp=CAU" alt="BTF Banner" />
+  <h1>🛡️ Yüksek İdare {Alt Y.} Bilgi Paneli</h1>
+  <p class="discord-invite">💬 <a href="https://discord.gg/W7WrBdbP" target="_blank" rel="noopener noreferrer">Discord Davet Linki</a></p>
 
-  <main>
-    <div class="buttons">
-      <button id="addReportBtn">Rapor Ekle</button>
-      <button id="clearReportsBtn">Tüm Raporları Temizle</button>
-    </div>
+  <button class="wumpus-btn" onclick="window.location.href='wumpus-error.html'">Wumpus</button>
+</header>
 
-    <div id="reportList" class="report-list"></div>
-  </main>
+<main>
 
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <h2>Rapor Ekle</h2>
-      <form id="reportForm">
-        <label>Roblox İsim:<br /><input type="text" name="robloxName" required /></label>
-        <label>DC İsim:<br /><input type="text" name="dcName" required /></label>
-        <label>Kaçıncı Raporum:<br /><input type="number" name="reportNumber" min="1" required /></label>
-        <label>İcraatler:<br /><textarea name="actions" rows="2" required></textarea></label>
-        <label>Yaptığım Etkinlik Sayısı:<br /><input type="number" name="eventCount" min="0" required /></label>
-        <label>Gün İçerisinde Aktiflik Süresi:<br /><input type="text" name="activeTime" required placeholder="Örnek: 3 saat" /></label>
-        <label>Bulunduğum Birim:<br /><input type="text" name="unit" required /></label>
-        <label>Kanıt/SS:<br /><input type="text" name="proof" placeholder="Link veya açıklama" /></label>
-        <label>Tarih:<br /><input type="date" name="date" required /></label>
-        <div class="modal-buttons">
-          <button type="submit">Kaydet</button>
-          <button type="button" id="cancelBtn">İptal</button>
-        </div>
-      </form>
-    </div>
-  </div>
+<section id="rutbe-islemleri" class="card interactive">
+  <h2>📜 Rütbe İşlemleri</h2>
+  <ol>
+    <li>Rütbe Talebi: Üye, istediği rütbeyi form aracılığıyla talep eder.</li>
+    <li>Başvurunun İncelenmesi: Alt yönetim kurulu başvuruyu değerlendirir.</li>
+    <li>Onay veya Red: Başvuru uygun bulunursa onaylanır, değilse geri bildirim yapılır.</li>
+    <li>Rütbe Verme: Onaylanan üyeye ilgili rütbe atanır ve sistemde güncellenir.</li>
+    <li>Rütbe Güncelleme: Üyelerin rütbeleri görev ve performansa göre periyodik olarak gözden geçirilir.</li>
+  </ol>
+</section>
+
+<section id="alt-yonetim-gorevleri" class="card interactive">
+  <h2>🛠️ Alt Yönetim Görevleri</h2>
+  <ul>
+    <li>Etkinlik İzin Onayları</li>
+    <li>Terfi Taleplerini Değerlendirme</li>
+    <li>Geri Dönüş Taleplerini Yönetme</li>
+    <li>Hesap Aktarım Talepleri</li>
+    <li>Emekli Dönüş Taleplerini İnceleme</li>
+    <li>Ban Dönüş Taleplerini Ele Alma</li>
+  </ul>
+</section>
+
+<section id="kurallar-hakkinda" class="card interactive">
+  <h2>📏 Kurallar Hakkında</h2>
+  <p>
+    Komutanlıkta düzen ve disiplin esastır. Tüm üyelerimiz belirlenen kurallara uymak zorundadır.  
+    Kurallar ihlali durumunda yetkililer gerekli yaptırımları uygular.
+  </p>
+</section>
+
+<section id="etkinlik-kurallari" class="card interactive">
+  <h2>🎯 Etkinlik Kuralları</h2>
+  <p>
+    - Etkinlikler maksimum 25 puan üzerinden yapılır.<br />
+    - 50 puanlık etkinlikler sadece Başkan veya Başkan Yardımcısı onayı ile olabilir.<br />
+    - Etkinliklerde adalet ve düzen sağlanması önceliklidir.
+  </p>
+</section>
+
+<section id="yuksek-idare-bildirgesi" class="card interactive">
+  <h2>⚔️ Yüksek İdare Etkinlik Bildirgesi</h2>
+  <p>
+    Yüksek İdare, etkinliklerde disiplin ve kuralların sağlanmasından sorumludur.  
+    Her türlü aksaklıkta hızlı geri bildirim ve müdahale zorunludur.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2025 Komutanlık Bilgi Sistemi - Tasarım ve Geliştirme: Wumpus</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
