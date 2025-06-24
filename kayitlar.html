@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📊 Kayıtlar - BTF Admin Panel</title>
+  <link rel="icon" href="2.ico" type="image/x-icon" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ffd700;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffd700;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    .kayitlar-table {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .table-header {
+      background: rgba(183, 28, 28, 0.8);
+      padding: 15px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .kayit-item {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr 1fr;
+      gap: 15px;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+    .kayit-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .kayit-item:last-child {
+      border-bottom: none;
+    }
+    .kayit-zaman {
+      font-weight: 600;
+      color: #ffd700;
+    }
+    .kayit-user {
+      font-weight: 600;
+    }
+    .kayit-device {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    .kayit-action {
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .action-giris {
+      background: rgba(76, 175, 80, 0.8);
+    }
+    .action-cikis {
+      background: rgba(244, 67, 54, 0.8);
+    }
+    .action-kayit {
+      background: rgba(33, 150, 243, 0.8);
+    }
+    .action-ziyaret {
+      background: rgba(156, 39, 176, 0.8);
+    }
+    .no-records {
+      text-align: center;
+      padding: 40px;
+      opacity: 0.7;
+      font-size: 1.1rem;
+    }
+    .refresh-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #ffd700, #ffb347);
+      border: none;
+      color: #333;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    .refresh-btn:hover {
+      transform: translateY(-2px) scale(1.1);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    }
+    @media (max-width: 768px) {
+      .kayit-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+      }
+      .header h1 {
+        font-size: 2rem;
+      }
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 BTF Kayıtlar Paneli</h1>
+      <p>Siteye giren tüm kullanıcıların detaylı kayıtları</p>
+    </div>
+
+    <div class="stats" id="stats">
+      <div class="stat-card">
+        <div class="stat-number" id="total-records">0</div>
+        <div class="stat-label">Toplam Kayıt</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="total-users">0</div>
+        <div class="stat-label">Toplam Kullanıcı</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="total-visits">0</div>
+        <div class="stat-label">Toplam Ziyaret</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="today-records">0</div>
+        <div class="stat-label">Bugünkü Kayıtlar</div>
+      </div>
+    </div>
+
+    <div class="kayitlar-table">
+      <div class="table-header">📋 Tüm Kayıtlar</div>
+      <div id="kayitlar-list">
+        <div class="no-records">Kayıtlar yükleniyor...</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="refresh-btn" onclick="loadKayitlar()" title="Yenile">🔄</button>
+
+  <script>
+    function loadKayitlar() {
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      const kayitlarList = document.getElementById('kayitlar-list');
+
+      if (kayitlar.length === 0) {
+        kayitlarList.innerHTML = '<div class="no-records">Henüz kayıt bulunmuyor.</div>';
+        return;
+      }
+
+      const totalRecords = kayitlar.length;
+      const uniqueUsers = [...new Set(kayitlar.map(k => k.discordName).filter(Boolean))].length;
+      const totalVisits = kayitlar.filter(k => k.action === 'ziyaret').length;
+      const today = new Date().toLocaleDateString('tr-TR');
+      const todayRecords = kayitlar.filter(k => k.tarih === today).length;
+
+      document.getElementById('total-records').textContent = totalRecords;
+      document.getElementById('total-users').textContent = uniqueUsers;
+      document.getElementById('total-visits').textContent = totalVisits;
+      document.getElementById('today-records').textContent = todayRecords;
+
+      const sortedKayitlar = kayitlar.sort((a, b) =>
+        new Date(b.tarih + ' ' + b.saat) - new Date(a.tarih + ' ' + a.saat)
+      );
+
+      kayitlarList.innerHTML = sortedKayitlar.map(k => `
+        <div class="kayit-item">
+          <div class="kayit-zaman">
+            📅 ${k.tarih}<br>🕐 ${k.saat}
+          </div>
+          <div class="kayit-user">
+            👤 ${k.discordName || 'Ziyaretçi'}<br>${k.password ? `🔐 ${k.password}` : ''}
+          </div>
+          <div class="kayit-device">
+            💻 ${k.markaModel || 'Bilinmiyor'}
+          </div>
+          <div class="kayit-action action-${k.action}">
+            ${k.action.toUpperCase()}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.addEventListener('load', () => {
+      loadKayitlar();
+      setInterval(loadKayitlar, 10000);
+    });
+
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'kayitlar-update') {
+        loadKayitlar();
+      }
+    });
+  </script>
+</body>
+</html>

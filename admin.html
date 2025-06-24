@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👑 Admin Panel - Yüksek İdare</title>
+  <link rel="icon" href="2.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+      min-height: 100vh;
+    }
+    
+    .admin-header {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+    }
+    
+    .admin-header h1 {
+      color: white;
+      margin: 0;
+      font-size: 2rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #4fc3f7;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    
+    .logs-container {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 25px;
+    }
+    
+    .logs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .logs-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 12px;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-color: #667eea;
+    }
+    
+    .log-entry {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .log-entry:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+    
+    .log-time {
+      color: #4fc3f7;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .log-user {
+      color: #ffd700;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .log-action {
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+    
+    .log-details {
+      color: #aaa;
+      font-size: 12px;
+      font-style: italic;
+    }
+    
+    .back-btn {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn:hover {
+      background: linear-gradient(135deg, #c0392b, #a93226);
+      transform: translateY(-2px);
+    }
+    
+    .admin-actions {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .admin-action-btn {
+      background: linear-gradient(135deg, #4caf50, #388e3c);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+    
+    .admin-action-btn:hover {
+      background: linear-gradient(135deg, #388e3c, #2e7d32);
+      transform: translateY(-2px);
+    }
+    
+    .admin-action-btn.danger {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+    }
+    
+    .admin-action-btn.danger:hover {
+      background: linear-gradient(135deg, #c0392b, #a93226);
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>👑 Admin Control Panel</h1>
+      <p style="color: rgba(255,255,255,0.8); margin: 10px 0 0 0;">Yüksek İdare Sistem Yönetimi</p>
+    </div>
+    
+    <div class="admin-stats">
+      <div class="stat-card">
+        <div class="stat-number" id="total-users">0</div>
+        <div class="stat-label">📊 Toplam Kullanıcı</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="total-logins">0</div>
+        <div class="stat-label">🔑 Toplam Giriş</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="total-actions">0</div>
+        <div class="stat-label">⚡ Toplam İşlem</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="online-users">0</div>
+        <div class="stat-label">🟢 Çevrimiçi Kullanıcı</div>
+      </div>
+    </div>
+    
+    <div class="admin-actions">
+      <button class="admin-action-btn" onclick="exportAllLogs()">💾 Tüm Logları İndir</button>
+      <button class="admin-action-btn" onclick="clearOldLogs()">🧹 Eski Logları Temizle</button>
+      <button class="admin-action-btn danger" onclick="resetAllData()">⚠️ Tüm Verileri Sıfırla</button>
+      <button class="admin-action-btn" onclick="generateReport()">📈 Rapor Oluştur</button>
+    </div>
+    
+    <div class="logs-container">
+      <div class="logs-header">
+        <h3 style="color: #fff; margin: 0;">📋 Sistem Logları</h3>
+        <a href="index.html" class="back-btn">⬅️ Ana Sayfaya Dön</a>
+      </div>
+      
+      <div class="logs-filters">
+        <button class="filter-btn active" onclick="filterLogs('all')">Tümü</button>
+        <button class="filter-btn" onclick="filterLogs('giris')">Giriş</button>
+        <button class="filter-btn" onclick="filterLogs('cikis')">Çıkış</button>
+        <button class="filter-btn" onclick="filterLogs('profil')">Profil</button>
+        <button class="filter-btn" onclick="filterLogs('ayarlar')">Ayarlar</button>
+        <button class="filter-btn" onclick="filterLogs('telsiz')">Telsiz</button>
+      </div>
+      
+      <div id="logs-list">
+        <!-- Loglar buraya dinamik yüklenecek -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Admin kontrolü - tüm adminler erişebilir
+    function checkAdminAccess() {
+      const currentUser = localStorage.getItem('yuksek-idare-user');
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const userData = registeredUsers.find(user => user.discordName === currentUser);
+      
+      if (!userData || (!userData.isAdmin && !userData.isCreator)) {
+        showAdminAccessDenied();
+        return false;
+      }
+      
+      // Creator kontrolü için global değişken
+      window.isCreatorUser = userData.isCreator;
+      
+      return true;
+    }
+
+    // Admin erişim reddedildi - embed uyarı
+    function showAdminAccessDenied() {
+      const warning = document.createElement('div');
+      warning.style.cssText = `
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+      
+      warning.innerHTML = `
+        <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); padding: 40px; border-radius: 20px; text-align: center; color: white; max-width: 400px; border: 2px solid #ff3d3d;">
+          <div style="font-size: 60px; margin-bottom: 20px;">🔒</div>
+          <h2 style="margin-bottom: 20px; color: white;">Yetkisiz Erişim!</h2>
+          <p style="margin-bottom: 30px; font-size: 16px; line-height: 1.5;">
+            Bu sayfaya sadece admin kullanıcıları erişebilir.
+          </p>
+          <button onclick="window.location.href='index.html'" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 16px;">
+            Ana Sayfaya Dön
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(warning);
+    }
+
+    // Sayfa yüklendiğinde admin kontrolü yap
+    if (!checkAdminAccess()) {
+      // Sayfa yönlendirmesi yapılacak
+    }
+
+    // İstatistikleri yükle
+    function loadStats() {
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      const onlineUsers = JSON.parse(localStorage.getItem('onlineUsers') || '[]');
+      
+      document.getElementById('total-users').textContent = registeredUsers.length;
+      document.getElementById('total-logins').textContent = kayitlar.filter(k => k.action === 'giris').length;
+      document.getElementById('total-actions').textContent = kayitlar.length;
+      document.getElementById('online-users').textContent = onlineUsers.length;
+    }
+
+    // Logları yükle
+    function loadLogs() {
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      const logsList = document.getElementById('logs-list');
+      
+      if (kayitlar.length === 0) {
+        logsList.innerHTML = '<div style="text-align: center; color: #aaa; padding: 40px;">Henüz log kaydı bulunmuyor.</div>';
+        return;
+      }
+      
+      // Tarihe göre sırala (en yeni üstte)
+      const sortedLogs = kayitlar.sort((a, b) => new Date(b.tarih + ' ' + b.saat) - new Date(a.tarih + ' ' + a.saat));
+      
+      logsList.innerHTML = '';
+      sortedLogs.forEach(log => {
+        const logEntry = document.createElement('div');
+        logEntry.className = 'log-entry';
+        logEntry.innerHTML = `
+          <div class="log-time">📅 ${log.tarih} ⏰ ${log.saat}</div>
+          <div class="log-user">👤 ${log.discordName || 'Ziyaretçi'}</div>
+          <div class="log-action">⚡ ${getActionText(log.action)}</div>
+          <div class="log-details">💻 ${log.markaModel || 'Bilinmiyor'}</div>
+        `;
+        logsList.appendChild(logEntry);
+      });
+    }
+
+    // İşlem tipini metne çevir
+    function getActionText(action) {
+      const actionMap = {
+        'giris': '🔓 Sisteme Giriş Yaptı',
+        'cikis': '🔒 Sistemden Çıkış Yaptı',
+        'kayit': '📝 Sisteme Kayıt Oldu',
+        'ziyaret': '👁️ Sayfayı Ziyaret Etti'
+      };
+      return actionMap[action] || action;
+    }
+
+    // Log filtreleme
+    function filterLogs(type) {
+      // Filtre butonlarını güncelle
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      let filteredLogs = kayitlar;
+      
+      if (type !== 'all') {
+        filteredLogs = kayitlar.filter(log => log.action === type);
+      }
+      
+      const logsList = document.getElementById('logs-list');
+      
+      if (filteredLogs.length === 0) {
+        logsList.innerHTML = '<div style="text-align: center; color: #aaa; padding: 40px;">Bu kategoride log bulunamadı.</div>';
+        return;
+      }
+      
+      const sortedLogs = filteredLogs.sort((a, b) => new Date(b.tarih + ' ' + b.saat) - new Date(a.tarih + ' ' + a.saat));
+      
+      logsList.innerHTML = '';
+      sortedLogs.forEach(log => {
+        const logEntry = document.createElement('div');
+        logEntry.className = 'log-entry';
+        logEntry.innerHTML = `
+          <div class="log-time">📅 ${log.tarih} ⏰ ${log.saat}</div>
+          <div class="log-user">👤 ${log.discordName || 'Ziyaretçi'}</div>
+          <div class="log-action">⚡ ${getActionText(log.action)}</div>
+          <div class="log-details">💻 ${log.markaModel || 'Bilinmiyor'}</div>
+        `;
+        logsList.appendChild(logEntry);
+      });
+    }
+
+    // Tüm logları indir
+    function exportAllLogs() {
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      
+      const exportData = {
+        timestamp: new Date().toISOString(),
+        totalUsers: registeredUsers.length,
+        totalLogs: kayitlar.length,
+        users: registeredUsers,
+        logs: kayitlar
+      };
+      
+      const dataStr = JSON.stringify(exportData, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `admin_logs_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      
+      URL.revokeObjectURL(url);
+      alert('📥 Tüm loglar başarıyla indirildi!');
+    }
+
+    // Eski logları temizle (30 günden eski)
+    function clearOldLogs() {
+      if (!confirm('30 günden eski logları silmek istediğinizden emin misiniz?')) return;
+      
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      
+      const filteredLogs = kayitlar.filter(log => {
+        const logDate = new Date(log.tarih.split('.').reverse().join('-'));
+        return logDate >= thirtyDaysAgo;
+      });
+      
+      localStorage.setItem('kayitlar', JSON.stringify(filteredLogs));
+      alert(`🧹 ${kayitlar.length - filteredLogs.length} eski log silindi.`);
+      loadLogs();
+      loadStats();
+    }
+
+    // Tüm verileri sıfırla
+    function resetAllData() {
+      if (!confirm('⚠️ DİKKAT!\n\nTüm kullanıcı verileri, loglar ve ayarlar silinecek!\n\nBu işlem GERİ ALINAMAZ!\n\nDevam etmek istediğinizden emin misiniz?')) return;
+      
+      if (!confirm('Son onay: Gerçekten tüm verileri silmek istiyor musunuz?')) return;
+      
+      // Tüm verileri temizle
+      localStorage.removeItem('registeredUsers');
+      localStorage.removeItem('kayitlar');
+      localStorage.removeItem('onlineUsers');
+      localStorage.removeItem('yuksek-idare-user');
+      localStorage.removeItem('radioMessages');
+      localStorage.removeItem('aiChatHistory');
+      
+      alert('🗑️ Tüm veriler silindi. Ana sayfaya yönlendiriliyorsunuz...');
+      window.location.href = 'index.html';
+    }
+
+    // Rapor oluştur
+    function generateReport() {
+      const kayitlar = JSON.parse(localStorage.getItem('kayitlar') || '[]');
+      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      
+      const report = {
+        generatedAt: new Date().toISOString(),
+        summary: {
+          totalUsers: registeredUsers.length,
+          totalLogins: kayitlar.filter(k => k.action === 'giris').length,
+          totalVisits: kayitlar.filter(k => k.action === 'ziyaret').length,
+          totalRegistrations: kayitlar.filter(k => k.action === 'kayit').length
+        },
+        userDevices: {},
+        dailyStats: {}
+      };
+      
+      // Cihaz istatistikleri
+      kayitlar.forEach(log => {
+        if (log.markaModel) {
+          report.userDevices[log.markaModel] = (report.userDevices[log.markaModel] || 0) + 1;
+        }
+      });
+      
+      // Günlük istatistikler
+      kayitlar.forEach(log => {
+        if (log.tarih) {
+          report.dailyStats[log.tarih] = (report.dailyStats[log.tarih] || 0) + 1;
+        }
+      });
+      
+      const reportStr = JSON.stringify(report, null, 2);
+      const blob = new Blob([reportStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `system_report_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      
+      URL.revokeObjectURL(url);
+      alert('📈 Sistem raporu oluşturuldu ve indirildi!');
+    }
+
+    // Sayfa yüklendiğinde çalıştır
+    document.addEventListener('DOMContentLoaded', function() {
+      loadStats();
+      loadLogs();
+    });
+  </script>
+</body>
+</html>

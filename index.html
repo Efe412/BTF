@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Yüksek İdare {Alt Y.} Bilgi Paneli</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="Readd.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+<header>
+  <!-- Modern Panel Toggle -->
+  <button class="modern-menu-toggle" onclick="toggleModernPanel()">☰</button>
+
+  <!-- Yeni Basit Panel Sistemi -->
+  <div class="modern-panel" id="modern-panel">
+    <div class="panel-header">
+      <h3>🛡️ Yüksek İdare Paneli</h3>
+      <button class="panel-close" onclick="toggleModernPanel()">✕</button>
+    </div>
+    
+    <div class="panel-content">
+      <!-- Ana Menü Bölümü -->
+      <div class="panel-section">
+        <div class="section-title">🏠 Ana Menü</div>
+        <div class="panel-items">
+          <button class="panel-item" id="kadro-panel" onclick="scrollToSection('alt-yonetim-kadro'); toggleModernPanel();">
+            👥 Kadro
+          </button>
+          <button class="panel-item" id="rutbe-panel" onclick="scrollToSection('rutbe-islemleri'); toggleModernPanel();">
+            ⚔️ Rütbe İşlemleri
+          </button>
+          <button class="panel-item" id="kurallar-panel" onclick="scrollToSection('kurallar-hakkinda'); toggleModernPanel();">
+            📏 Kurallar
+          </button>
+          <button class="panel-item" id="etkinlik-panel" onclick="scrollToSection('etkinlik-kurallari'); toggleModernPanel();">
+            🎯 Etkinlik Kuralları
+          </button>
+          <button class="panel-item" id="bildirge-panel" onclick="scrollToSection('yuksek-idare-bildirgesi'); toggleModernPanel();">
+            📜 Bildirgesi
+          </button>
+          <button class="panel-item" id="hakkimizda-panel" onclick="scrollToSection('hakkimizda'); toggleModernPanel();">
+            🛠️ Hakkımızda
+          </button>
+          <button class="panel-item" id="yonetim-panel" onclick="scrollToSection('yonetim-kadrosu'); toggleModernPanel();">
+            👥 Yönetim Kadrosu
+          </button>
+        </div>
+      </div>
+
+      <!-- Sosyal & Bağlantılar -->
+      <div class="panel-section">
+        <div class="section-title">🔗 Sosyal & Bağlantılar</div>
+        <div class="panel-items">
+          <button class="panel-item discord-item" onclick="window.open('https://discord.gg/W7WrBdbP', '_blank'); showEmbedMessage('Discord sunucumuza hoşgeldiniz!', 'success'); toggleModernPanel();">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+              <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z"/>
+            </svg>
+            Discord
+          </button>
+        </div>
+      </div>
+
+      <!-- Kullanıcı İşlemleri -->
+      <div class="panel-section">
+        <div class="section-title">👤 Kullanıcı İşlemleri</div>
+        <div class="panel-items">
+          <button class="panel-item" id="profile-panel" style="display:none;" onclick="openProfileModal(); toggleModernPanel();">
+            👤 Profil
+          </button>
+          <button class="panel-item" onclick="openSettingsModal(); toggleModernPanel();">
+            ⚙️ Ayarlar
+          </button>
+          <button class="panel-item" id="radio-panel" style="display:none;" onclick="openRadioModal(); toggleModernPanel();">
+            📻 Telsiz
+          </button>
+          <button class="panel-item ai-item" onclick="openAdvancedAI(); toggleModernPanel();">
+            🤖 Gelişmiş Yapay Zeka
+          </button>
+        </div>
+      </div>
+
+      <!-- Yüksek İdare Paneli -->
+      <div class="panel-section">
+        <div class="section-title">🛡️ Yüksek İdare Paneli</div>
+        <div class="panel-items">
+          <button class="panel-item" onclick="openBackgroundCustomizer(); toggleModernPanel();">
+            🎨 Arka Plan Özelleştir
+          </button>
+          <button class="panel-item" onclick="openAnimationSelector(); toggleModernPanel();">
+            ✨ Animasyonlu Arka Plan
+          </button>
+          <button class="panel-item" onclick="openPhotoPreviewModal('panel'); toggleModernPanel();">
+            🖼️ Panel Arka Plan
+          </button>
+          <button class="panel-item" onclick="resetToDefaults(); toggleModernPanel();">
+            🔄 Varsayılana Sıfırla
+          </button>
+        </div>
+      </div>
+
+      <!-- Kullanıcı Bilgileri -->
+      <div class="panel-section" id="user-info-section" style="display:none;">
+        <div class="section-title">👤 Kullanıcı Bilgileri</div>
+        <div class="user-card">
+          <div class="user-avatar-panel" id="user-avatar-panel">U</div>
+          <div class="user-info-panel">
+            <div class="user-name-panel" id="user-name-panel">Kullanıcı</div>
+            <div class="user-status-panel">🟢 Aktif</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tema Kontrolü -->
+      <div class="panel-section">
+        <div class="section-title">🎨 Tema</div>
+        <div class="theme-buttons">
+          <button class="theme-button dark" onclick="setTheme('dark')" title="Koyu Tema">🌙 Koyu</button>
+          <button class="theme-button light" onclick="setTheme('light')" title="Açık Tema">☀️ Açık</button>
+        </div>
+      </div>
+
+      <!-- Çıkış -->
+      <div class="panel-section" id="logout-section" style="display:none;">
+        <div class="panel-items">
+          <button class="panel-item logout-item" onclick="logout(); toggleModernPanel();">
+            🚪 Çıkış Yap
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Overlay -->
+  <div class="panel-overlay" id="panel-overlay" onclick="toggleModernPanel()"></div>
+
+  <div class="banner-container">
+    <img class="top-banner" src="https://cdn.static.pikoya.com/robloxgo/games/10087093881/thumbnail_3" alt="Yüksek İdare Banner" />
+  </div>
+  <h1>🛡️ Yüksek İdare {Alt Y.} Bilgi Paneli</h1>
+</header>
+
+<main>
+  <section id="rutbe-islemleri" class="card interactive">
+    <h2>⚔️ Rütbe İşlemleri</h2>
+    <ol>
+      <li>Onayladıktan sonra alttaki işlemleri tamamla</li>
+      <li>İlk önce Yüksek İdaredeki terfi-tenzil-izin kanalından izin iste</li>
+      <li>İzin aldığında izni SS al ve herşeyi bitirmeden önce sakın silme</li>
+      <li>Terfi-tenzil-kayıt at</li>
+      <li>Adım-3 te aldığın SS'i kullanarak önemli icraatlerde sabitlenen formatı doldur ve gönder</li>
+      <li>Önemli icraatlerde onay aldıktan sonra BTF de terfi-tenzil-bilgilendirme kanalına formata uyarak gönder</li>
+      <li>Herşeyi tamamladıktan sonra rütbesini BTF dd rütbelendirme kanalından verebilirsin</li>
+    </ol>
+  </section>
+
+  <section id="hakkimizda" class="card interactive">
+    <h2>🛠️ Alt Yönetim Görevleri</h2>
+    <ul>
+      <li>Etkinlik İzin Onayları</li>
+      <li>Terfi Taleplerini Değerlendirme</li>
+      <li>Geri Dönüş Taleplerini Yönetme</li>
+      <li>Hesap Aktarım Talepleri</li>
+      <li>Emekli Dönüş Taleplerini İnceleme</li>
+      <li>Ban Dönüş Taleplerini Ele Alma</li>
+    </ul>
+  </section>
+
+  <section id="kurallar-hakkinda" class="card interactive">
+    <h2>📏 Kurallar Hakkında</h2>
+    <p>
+      Komutanlıkta düzen ve disiplin esastır. Tüm üyelerimiz belirlenen kurallara uymak zorundadır.  
+      Kurallar ihlali durumunda yetkililer gerekli yaptırımları uygular.
+    </p>
+  </section>
+
+  <section id="etkinlik-kurallari" class="card interactive">
+    <h2>🎯 Etkinlik Kuralları</h2>
+    <p>
+      - Etkinlikler maksimum 25 puan üzerinden yapılır.<br />
+      - 50 puanlık etkinlikler sadece Başkan veya Başkan Yardımcısı onayı ile olabilir.<br />
+      - Etkinliklerde adalet ve düzen sağlanması önceliklidir.
+    </p>
+  </section>
+
+  <section id="yuksek-idare-bildirgesi" class="card interactive">
+    <h2>📜 Yüksek İdare Etkinlik Bildirgesi</h2>
+    <p>
+      Yüksek İdare, etkinliklerde disiplin ve kuralların sağlanmasından sorumludur.  
+      Her türlü aksaklıkta hızlı geri bildirim ve müdahale zorunludur.
+    </p>
+  </section>
+
+  <section id="alt-yonetim-kadro" class="card interactive">
+    <h2>👥 Yüksek İdare Alt Yönetim Kadrosu</h2>
+    <ul>
+      <li>Alt Y. | Sorumlusu: efemanagement.</li>
+      <li>Alt Y. | Başkanı: zenitsu_agatsuma55</li>
+      <li>Alt Y. | Başkan Yardımcısı: 0vexa.</li>
+      <li>Alt Y. | Üyesi: dusuncesizgokturk</li>
+      <li>Alt Y. | Üyesi: cinarprogs.</li>
+      <li>Alt Y. | Üyesi: ffwxfevzi</li>
+      <li>Alt Y. | Üyesi: masonardaa</li>
+      <li>Alt Y. | Üyesi: merpras</li>
+      <li>Alt Y. | Üyesi: raider.xyz2</li>
+      <li>Alt Y. | Üyesi: volley00</li>
+    </ul>
+  </section>
+
+  <section id="yonetim-kadrosu" class="card interactive">
+    <div class="yonetim-header">
+      <h2 class="yonetim-title">Yönetim Kadrosu</h2>
+      <p class="yonetim-subtitle">Wumpus Ekibi Olarak Hizmetinizdeyiz</p>
+    </div>
+
+    <div class="yonetim-grid">
+      <!-- Zenitsu - Owner (Sol) -->
+      <div class="yonetim-card owner-card left">
+        <div class="profile-image-container">
+          <img src="https://cdn.discordapp.com/avatars/706849680184836108/a_085fa49fde634e0ea431bbbc38d6f583.gif?size=1024&animated=true" 
+               alt="Zenitsu" class="profile-image">
+        </div>
+        <h3 class="profile-name">Zenitsu</h3>
+        <p class="profile-title">Owner (Yönetici)</p>
+      </div>
+
+      <!-- EfeManagement - Kainat Sahibi (Sağ) -->
+      <div class="yonetim-card owner-card right">
+        <div class="profile-image-container">
+          <img src="https://cdn.discordapp.com/avatars/1315982135039098880/a_c07274b3bf3e83dea6cde92fac37bc6a.gif?size=1024&animated=true" 
+               alt="EfeManagement" class="profile-image">
+        </div>
+        <h3 class="profile-name">EfeManagement</h3>
+        <p class="profile-title">Kainat Sahibi</p>
+      </div>
+
+      <!-- Wumpus - Başkan (Sol Alt) -->
+      <div class="yonetim-card assistant-card left">
+        <div class="profile-image-container">
+          <img src="https://cdn.discordapp.com/avatars/1163877190186840074/d27dc21c554552d65f4c4d0e7d9dd7c4.webp?size=1024" 
+               alt="Wumpus" class="profile-image">
+        </div>
+        <h3 class="profile-name">Wumpus</h3>
+        <p class="profile-title">Başkan (Yardımcı)</p>
+      </div>
+
+      <!-- Düşüncesiz - Başkan (Sağ Alt) -->
+      <div class="yonetim-card assistant-card right">
+        <div class="profile-image-container">
+          <img src="https://cdn.discordapp.com/avatars/1269529798359777323/616334c0095c7cc4cadcbcd708b812ef.webp?size=1024" 
+               alt="Düşüncesiz" class="profile-image">
+        </div>
+        <h3 class="profile-name">Düşüncesiz</h3>
+        <p class="profile-title">Başkan (Yardımcı)</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Komutanlık Bilgi Sistemi - Tasarım ve Geliştirme: Wumpus</p>
+</footer>
+
+<div id="blur-overlay" class="blur-overlay"></div>
+
+<!-- Giriş Yap Modal -->
+<div id="login-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h3>Giriş Yap</h3>
+    <form id="login-form" autocomplete="off">
+      <input type="text" id="login-username" placeholder="Kullanıcı Adı" autocomplete="off" />
+      <div id="error-login-username" class="error-msg hide"></div>
+
+      <input type="password" id="login-password" placeholder="Parola" autocomplete="off" />
+      <div id="error-login-password" class="error-msg hide"></div>
+
+      <button type="submit" class="modal-submit">Giriş Yap</button>
+    </form>
+
+    <div class="modal-links">
+      <span>Hesabınız yok mu? <a href="#" id="show-register">Kayıt Ol</a></span>
+      <span>|</span>
+      <span><a href="#" id="forgot-password">Şifremi Unuttum</a></span>
+    </div>
+
+    <div id="forgot-password-message" style="display:none; margin-top:15px; color:#ff5252; text-align:center; user-select:none;">
+      Bu siteyi tasarlayan Wumpus bey ile iletişime geçin.<br/>
+      <a href="#" id="back-to-login" style="color:#ff1744; text-decoration:underline; cursor:pointer; user-select:none;">Geri Dön</a>
+    </div>
+  </div>
+</div>
+
+<!-- Kayıt Ol Modal -->
+<div id="register-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h3>Kayıt Ol</h3>
+    <form id="register-form" autocomplete="off">
+      <input type="text" id="discord-name" placeholder="Discord İsmi" autocomplete="off" />
+      <div id="error-discord-name" class="error-msg hide"></div>
+
+      <input type="password" id="password" placeholder="Şifre" autocomplete="off" />
+      <div id="error-password" class="error-msg hide"></div>
+
+      <input type="password" id="password2" placeholder="Şifre (Tekrar)" autocomplete="off" />
+      <div id="error-password2" class="error-msg hide"></div>
+
+      <button type="submit" class="modal-submit">Kayıt Ol</button>
+    </form>
+
+    <div style="text-align:center; margin-top:10px; user-select:none; color:#eee;">
+      Zaten hesabınız var mı? <a href="#" id="back-to-login-from-register" style="color:#ff1744; cursor:pointer; text-decoration:underline;">Giriş Yap</a>
+    </div>
+  </div>
+</div>
+
+<!-- Telsiz Modal -->
+<div id="radio-modal" class="modal" style="display:none;">
+  <div class="modal-content radio-modal-content">
+    <div class="radio-header">
+      <h3>📻 Yüksek İdare Telsiz Sistemi</h3>
+      <div class="online-users-count">
+        <span id="online-count">0</span> aktif kullanıcı
+      </div>
+    </div>
+    
+    <div class="radio-users-panel">
+      <h4>📡 Aktif Kullanıcılar</h4>
+      <div id="online-users-list" class="users-list"></div>
+    </div>
+
+    <div class="radio-messages" id="radio-messages">
+      <div class="welcome-message">
+        📻 Telsiz sistemine hoşgeldiniz! Mesajlarınız tüm aktif kullanıcılara ulaşacak.
+      </div>
+    </div>
+
+    <div class="radio-input-area">
+      <div class="radio-controls">
+        <button class="radio-control-btn" onclick="clearRadioChat()">🧹 Temizle</button>
+        <button class="radio-control-btn" onclick="toggleRadioSounds()">🔊 Sesler</button>
+        <button class="radio-control-btn" onclick="exportRadioChat()">💾 Dışa Aktar</button>
+        <button class="radio-control-btn" onclick="openEmojiPicker()">😀 Emoji</button>
+        <button class="radio-control-btn" onclick="uploadRadioImage()">📷 Fotoğraf</button>
+      </div>
+      <div class="message-input-container">
+        <div class="radio-input-controls">
+          <button class="radio-input-btn" onclick="openEmojiPicker()" title="Emoji Ekle">😀</button>
+          <button class="radio-input-btn" onclick="uploadRadioImage()" title="Resim Ekle">📷</button>
+          <button class="radio-input-btn" onclick="attachFile()" title="Dosya Ekle">📎</button>
+        </div>
+        <textarea id="radio-message-input" placeholder="Mesajınızı buraya yazın... (@everyone ile herkesi etiketleyebilirsiniz)" maxlength="1000" rows="3"></textarea>
+        <button onclick="sendRadioMessage()" class="send-btn-large">📡</button>
+      </div>
+      <div id="emoji-picker" class="emoji-picker" style="display:none;">
+        <div class="emoji-grid">
+          <span class="emoji-item" onclick="addEmoji('😀')">😀</span>
+          <span class="emoji-item" onclick="addEmoji('😂')">😂</span>
+          <span class="emoji-item" onclick="addEmoji('😍')">😍</span>
+          <span class="emoji-item" onclick="addEmoji('🤔')">🤔</span>
+          <span class="emoji-item" onclick="addEmoji('👍')">👍</span>
+          <span class="emoji-item" onclick="addEmoji('👎')">👎</span>
+          <span class="emoji-item" onclick="addEmoji('❤️')">❤️</span>
+          <span class="emoji-item" onclick="addEmoji('💯')">💯</span>
+          <span class="emoji-item" onclick="addEmoji('🔥')">🔥</span>
+          <span class="emoji-item" onclick="addEmoji('⚡')">⚡</span>
+          <span class="emoji-item" onclick="addEmoji('🎯')">🎯</span>
+          <span class="emoji-item" onclick="addEmoji('🚀')">🚀</span>
+          <span class="emoji-item" onclick="addEmoji('⭐')">⭐</span>
+          <span class="emoji-item" onclick="addEmoji('🌟')">🌟</span>
+          <span class="emoji-item" onclick="addEmoji('💎')">💎</span>
+          <span class="emoji-item" onclick="addEmoji('🏆')">🏆</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="modal-close-btn" onclick="closeRadioModal()">✕</button>
+  </div>
+</div>
+
+<!-- Uygulamalar Modal -->
+<div id="apps-modal" class="modal" style="display:none;">
+  <div class="modal-content apps-modal-content">
+    <h3>📱 Uygulamalar</h3>
+    
+    <div class="apps-grid">
+      <div class="app-item" onclick="openFileManager()">
+        <div class="app-icon">📁</div>
+        <div class="app-name">Dosya Yöneticisi</div>
+      </div>
+      
+      <div class="app-item" onclick="openClipSharer()">
+        <div class="app-icon">📋</div>
+        <div class="app-name">Klip Paylaş</div>
+      </div>
+      
+      <div class="app-item" onclick="openVoiceRecorder()">
+        <div class="app-icon">🎤</div>
+        <div class="app-name">Ses Kaydı</div>
+      </div>
+      
+      <div class="app-item" onclick="openSurveyCreator()">
+        <div class="app-icon">📊</div>
+        <div class="app-name">Anket Oluştur</div>
+      </div>
+      
+      <div class="app-item" onclick="openCalculator()">
+        <div class="app-icon">🧮</div>
+        <div class="app-name">Hesap Makinesi</div>
+      </div>
+      
+      <div class="app-item" onclick="openNotepad()">
+        <div class="app-icon">📝</div>
+        <div class="app-name">Not Defteri</div>
+      </div>
+    </div>
+
+    <button class="modal-close-btn" onclick="closeAppsModal()">✕</button>
+  </div>
+</div>
+
+<!-- Klip Paylaş Modal -->
+<div id="clip-modal" class="modal" style="display:none;">
+  <div class="modal-content clip-modal-content">
+    <h3>📋 Klip Paylaş</h3>
+    
+    <div class="clip-input-area">
+      <textarea id="clip-text" placeholder="Paylaşmak istediğiniz metni buraya yazın..."></textarea>
+      <div class="clip-controls">
+        <button onclick="shareClip()" class="clip-btn share-btn">📤 Paylaş</button>
+        <button onclick="clearClip()" class="clip-btn clear-btn">🧹 Temizle</button>
+      </div>
+    </div>
+    
+    <div class="shared-clips" id="shared-clips">
+      <h4>📋 Paylaşılan Klipler</h4>
+      <div id="clips-list"></div>
+    </div>
+
+    <button class="modal-close-btn" onclick="closeClipModal()">✕</button>
+  </div>
+</div>
+
+<!-- Banner Seçici Modal -->
+<div id="banner-selector-modal" class="modal" style="display:none;">
+  <div class="modal-content banner-selector-content">
+    <h3>🖼️ Kapak Fotoğrafı Seç</h3>
+    
+    <div class="banner-options">
+      <div class="banner-option-group">
+        <h4>📁 Kendi Görselinizi Yükleyin</h4>
+        <button class="banner-option-btn" onclick="uploadCustomBanner()">
+          📷 Cihazdan Görsel Yükle
+        </button>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🌿 Doğa</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//Z')">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABkAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP//Z" alt="Doğa 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('data:image/gif;base64,R0lGODlhyABkAKEAAGMdRP///wAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCgAAACwAAAAAyABkAAAC/4yPqcvtD6OctNqLs968+w+G4kiW5omm6sq27gvH8kzX9o3n+s73/g8MCofEovGITCqXzKbzCY1Kp9Sq9YrNarfcrvcLDovH5LL5jE6r1+y2+w2Py+f0uv2Oz+v3/L7/DxgoOEhYaHiImKi4yNjo+AgZKTlJWWl5iZmpucnZ6fkJGio6SlpqeoqaqrrK2ur6ChsrO0tba3uLm6u7y9vr+wscLDxMXGx8jJysvMzc7PwMHS09TV1tfY2drb3N3e39DR4uPk5ebn6Onq6+zt7u/g4fLz9PX29/j5+vv8/f7/8PMKDAgQQLGjyIMKHChQwbOnwIMaLEiRQrWryIMaPGjR7/PXr8CDKkyJEkS5o8iTKlypUsW7p8CTOmzJk0a9q8iTOnzp08e/r8CTSo0KFEixo9ijSp0qVMmzp9CjWq1KlUq1q9ijWr1q1cu3r9Cjas2LFky5o9izat2rVs27p9Czeu3Ll069q9izev3r18+/r9CziwYMGECxs+jDix4sWMGzt+DDmy5MmUK1u+jDmz5s2cO3v+DDq06NGkS5s+jTq16tWsW7t+DTu27Nm0a9u+jTu37t28e/v+DTy48OHEixs/jjy58uXMmzt/Dj269OnUq1u/jj279u3cu3v/Dj68+PHky5s/jz69+vXs27t/Dz++/Pn069u/jz+//v38+/v/A/D/PMABE5BgQg1GJKFDFz7EcEQOTvgghRNZXBGGEoHAYYYcXqQhRyOKWBGIJXqo4gcnijhiiSeqmOKKLLbo4oswxijjjDTWaOONOOao44489ujjj0AGKeSQRBZp5JFIJqnkkkw26eSTUEYp5ZRUVmnllVhmqeWWXHbp5ZdghinmmGSWaeaZaKap5ppstunmm3DGKeecdNZp55145qnnnnz26eefgAYq6KCEFmrooYgmquiijDbq6KOQRirppJRWaumlmGaq6aacdurpp6CGKuqopJZq6qmopqrqqqy26uqrsN7KKqy12orrrrz26uuvwAYr7LDEFmvsscgmq+yyzDbr7LPQRivttNRWa+212Gar7bbcduvtt+CGK+645JZr7rnopqvuuuy26+678MYr77z01mvvvfjmq+++/Pbr778AByzwwAQXbPDBCCes8MIMN+zwwxBHLPHEFFds8cUYZ6zxxhx37PHHIIcs8sgkl2zyySinrPLKLLfs8ss)' style="cursor: pointer;" title="GIF">
+            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAAAAAP///2BgYGZmZmxsbHR0dHh4eH19fSH5BAAAAAAALAAAAAAQABAAAAMyCLrc/jDKSau9OOvNu/9gKI5kaZ5oqq5s675wLM90bd94ru987//AoHBILBqPyKRyyWw6BwA7" alt="Doğa GIF">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=200&h=100&fit=crop" alt="Doğa 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200&h=100&fit=crop" alt="Doğa 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=100&fit=crop" alt="Doğa 4">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🌲 Orman</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200&h=100&fit=crop" alt="Orman 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=200&h=100&fit=crop" alt="Orman 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1574263867128-edec65b19505?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1574263867128-edec65b19505?w=200&h=100&fit=crop" alt="Orman 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=200&h=100&fit=crop" alt="Orman 4">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=100&fit=crop" alt="Orman 5">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🏞️ Park & Bahçe</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=200&h=100&fit=crop" alt="Park 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1573160103600-9415e2a88c3b?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1573160103600-9415e2a88c3b?w=200&h=100&fit=crop" alt="Park 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&h=100&fit=crop" alt="Park 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=200&h=100&fit=crop" alt="Park 4">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🌆 Şehir Manzarası</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=200&h=100&fit=crop" alt="Şehir 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=200&h=100&fit=crop" alt="Şehir 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=200&h=100&fit=crop" alt="Şehir 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=200&h=100&fit=crop" alt="Şehir 4">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🌌 Uzay & Galaksi</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=200&h=100&fit=crop" alt="Uzay 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=200&h=100&fit=crop" alt="Uzay 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1464802686167-b939a6910659?w=200&h=100&fit=crop" alt="Uzay 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=100&fit=crop" alt="Uzay 4">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🎮 Discord & Gaming</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjNzI4OWRhIDAlLCAjNDc1MmM0IDM1JSwgIzViNjhlZiA2NSUsICM0ZjQ2ZTUgMTAwJSkiLz4KPHN2ZyB4PSIzNzUiIHk9IjE3NSIgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IndoaXRlIj4KPHA+PGcgZmlsbD0id2hpdGUiPgo8cGF0aCBkPSJNMjAuMzE3IDQuNDkyQzE4LjY3MiAzLjgwOCAxNi45MjMgMy4zMTYgMTUuMTA3IDMuMDQ2QzE0LjkwNiAzLjQwOSAxNC42NjkgMy45MDQgMTQuNSA0LjM1OUMxMi42NDIgNC4xMTEgMTAuNzk4IDQuMTExIDguOTcgNC4zNTlDOC44IDMuOTA0IDguNTYgMy40MDkgOC4zNTcgMy4wNDZDNi41MzggMy4zMTYgNC43ODcgMy44MDggMy4xNDEgNC40OTJDMC40NTQgOC43MzEgLTAuMjc5IDEyLjg5NyAwLjA4NiAxNi45NzdDMi4xNzkgMTguNTQ4IDQuMjA0IDE5LjQxNSA2LjE5NyAxOS45OTVDNi42NjYgMTkuMzM3IDcuMDg2IDE4LjY0NSA3LjQ1MyAxNy45MjRDNi43NzUgMTcuNjU2IDYuMTI1IDE3LjMyMyA1LjUxMSAxNi45MzhDNS42NyAxNi44MjUgNS44MjggMTYuNzA3IDUuOTgxIDE2LjU4NUM5LjU4NiAxOC4zOTQgMTMuNjYgMTguMzk0IDE3LjIxOSAxNi41ODVDMTcuMzczIDE2LjcwNyAxNy41MzEgMTYuODI1IDE3LjY4OSAxNi45MzhDMTcuMDc0IDE3LjMyMyAxNi40MjMgMTcuNjU2IDE1Ljc0NiAxNy45MjRDMTYuMTEzIDE4LjY0NSAxNi41MzMgMTkuMzM3IDE3LjAwMyAxOS45OTVDMTguOTk2IDE5LjQxNSAyMS4wMjEgMTguNTQ4IDIzLjExNCAxNi45NzdDMjMuNTMyIDEyLjM2NCAyMi40MzkgOC4yMyAyMC4zMTcgNC40OTJaTTcuNzY3IDE0LjY0OEM2LjYxOCAxNC42NDggNS42NyAxMy41NjUgNS42NyAxMi4yMTNDNS42NyAxMC44NjEgNi41OTIgOS43NzggNy43NjcgOS43NzhDOC45NDIgOS43NzggOS44OSAxMC44NjEgOS44NjQgMTIuMjEzQzkuODY0IDEzLjU2NSA4Ljk0MiAxNC42NDggNy43NjcgMTQuNjQ4Wk0xNS40MzMgMTQuNjQ4QzE0LjI4NCAxNC42NDggMTMuMzM2IDEzLjU2NSAxMy4zMzYgMTIuMjEzQzEzLjMzNiAxMC44NjEgMTQuMjU4IDkuNzc4IDE1LjQzMyA5Ljc3OEMxNi42MDggOS43NzggMTcuNTU2IDEwLjg2MSAxNy41MyAxMi4yMTNDMTcuNTMgMTMuNTY1IDE2LjYwOCAxNC42NDggMTUuNDMzIDE0LjY0OFoiLz4KPC9nPgo8L3N2Zz4KPC9zdmc+')">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNzI4OWRhIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRpc2NvcmQgMTwvdGV4dD4KPC9zdmc+" alt="Discord 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=200&h=100&fit=crop" alt="Gaming 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=200&h=100&fit=crop" alt="Gaming 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1606318313253-f4b0b6d7e5c4?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1606318313253-f4b0b6d7e5c4?w=200&h=100&fit=crop" alt="Gaming 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJsaW5lYXItZ3JhZGllbnQoNDVkZWcsICM2NjZkZmYgMCUsICM0ZjQ2ZTUgNTAlLCAjN2M0ZGZmIDEwMCUpIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIj5EaXNjb3JkPC90ZXh0Pgo8L3N2Zz4=')">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNjY2ZGZmIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRpc2NvcmQgMjwvdGV4dD4KPC9zdmc+" alt="Discord 2">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🐾 Hayvanlar</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=200&h=100&fit=crop" alt="Hayvan 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200&h=100&fit=crop" alt="Hayvan 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=200&h=100&fit=crop" alt="Hayvan 3">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200&h=100&fit=crop" alt="Hayvan 4">
+          </div>
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=200&h=100&fit=crop" alt="Hayvan 5">
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-option-group">
+        <h4>🎨 Sanat & Soyut</h4>
+        <div class="banner-grid">
+          <div class="banner-item" onclick="selectBanner('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=100&fit=crop" alt="Soyut 1">
+          </div>
+          <div class="banner-item" onclick="selectBanner('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY2YjZiO3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmZWM4MztzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNGZkMWM3O3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ1cmwoI2dyYWQpIi8+Cjwvc3ZnPg==')">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSJ1cmwoI2dyYWQpIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmY2YjZiIiAvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0ZmQxYzciIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+" alt="Soyut 2">
+          </div>
+          <div class="banner-item" onclick="selectBanner('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjNjY3ZWVhIDAlLCAjNzY0YmE2IDM1JSwgIzY2N2VlYSA2NSUsICM2NjdlZWEgMTAwJSkiLz4KPC9zdmc+')">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDIwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNjY3ZWVhIi8+CjwvdmdnPg==" alt="Soyut 3">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="modal-close-btn" onclick="closeBannerSelector()">✕</button>
+  </div>
+</div>
+
+<!-- Gelişmiş AI Chat Sistemi -->
+<div id="advanced-ai-modal" class="advanced-ai-modal">
+  <div class="ai-chat-layout">
+    <!-- Sol Sidebar -->
+    <div class="ai-sidebar">
+      <div class="ai-sidebar-header">
+        <h3>💬 AI Sohbetler</h3>
+        <button class="ai-close-btn" onclick="closeAdvancedAI()">✕</button>
+      </div>
+      
+      <button class="new-chat-btn" onclick="startNewChat()">
+        <span class="btn-icon">➕</span>
+        Yeni Sohbet
+      </button>
+      
+      <div class="chat-search">
+        <input type="text" id="chat-search-input" placeholder="🔍 Sohbet ara..." onkeyup="searchChats()">
+      </div>
+      
+      <div class="chat-history">
+        <h4>📚 Geçmiş Sohbetler</h4>
+        <div id="chat-history-list">
+          <!-- Sohbet geçmişi buraya dinamik yüklenecek -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ana Chat Alanı -->
+    <div class="ai-main-chat">
+      <div class="ai-chat-header-main">
+        <div class="ai-info">
+          <div class="ai-avatar">🤖</div>
+          <div class="ai-details">
+            <h4>Gelişmiş AI Asistan</h4>
+            <span class="ai-status">🟢 Aktif</span>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="action-btn" onclick="clearCurrentChat()" title="Sohbeti Temizle">🗑️</button>
+          <button class="action-btn" onclick="exportCurrentChat()" title="Sohbeti Dışa Aktar">💾</button>
+        </div>
+      </div>
+      
+      <div class="ai-messages-container" id="ai-messages-container">
+        <div class="welcome-message">
+          <div class="ai-avatar-large">🤖</div>
+          <h3>Merhaba! Ben gelişmiş AI asistanınızım</h3>
+          <p>Size her konuda yardımcı olabilirim. Aşağıdaki örneklerden birini seçebilir veya doğrudan soru sorabilirsiniz:</p>
+          <div class="quick-suggestions">
+            <button class="quick-btn" onclick="askAdvancedAI('Bu siteyi kim tasarladı?')">🎨 Siteyi kim tasarladı?</button>
+            <button class="quick-btn" onclick="askAdvancedAI('Ayarlar nerede bulunur?')">⚙️ Ayarlar nerede?</button>
+            <button class="quick-btn" onclick="askAdvancedAI('Şeffaflık özelliği nasıl çalışır?')">🌫️ Şeffaflık nedir?</button>
+            <button class="quick-btn" onclick="askAdvancedAI('Profil fotoğrafını nasıl değiştiririm?')">👤 Profil değiştirme</button>
+            <button class="quick-btn" onclick="askAdvancedAI('Yeni banner nasıl seçilir?')">🖼️ Banner değiştirme</button>
+            <button class="quick-btn" onclick="askAdvancedAI('Plus abonesi nasıl olunur?')">⭐ Plus abonelik</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="ai-input-section">
+        <div class="input-toolbar">
+          <button class="toolbar-btn" onclick="attachImage()" title="Resim Ekle">📷</button>
+          <button class="toolbar-btn" onclick="openEmojiPanel()" title="Emoji Ekle">😀</button>
+          <button class="toolbar-btn" onclick="voiceInput()" title="Ses Girişi">🎤</button>
+          <button class="toolbar-btn" onclick="shareLocation()" title="Konum Paylaş">📍</button>
+        </div>
+        <div class="input-container">
+          <div class="input-wrapper">
+            <textarea id="ai-advanced-input" placeholder="AI ile sohbet etmek için mesajınızı yazın..." rows="1" onkeydown="handleAdvancedInput(event)" oninput="autoResize(this)"></textarea>
+            <button class="send-message-btn" onclick="sendAdvancedMessage()" id="send-btn">
+              <span class="send-icon">🚀</span>
+            </button>
+          </div>
+        </div>
+        <div class="input-info">
+          <span class="char-count" id="char-count">0 / 2000</span>
+          <span class="ai-thinking" id="ai-thinking" style="display:none;">🤖 AI düşünüyor...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Emoji Panel -->
+<div id="emoji-panel" class="emoji-panel" style="display:none;">
+  <div class="emoji-header">
+    <h4>😀 Emoji Seç</h4>
+    <button onclick="closeEmojiPanel()">✕</button>
+  </div>
+  <div class="emoji-categories">
+    <button class="emoji-cat" onclick="showEmojiCategory('people')">😀</button>
+    <button class="emoji-cat" onclick="showEmojiCategory('nature')">🌿</button>
+    <button class="emoji-cat" onclick="showEmojiCategory('objects')">🎯</button>
+    <button class="emoji-cat" onclick="showEmojiCategory('symbols')">💯</button>
+  </div>
+  <div class="emoji-grid" id="emoji-grid">
+    <!-- Emojiler dinamik yüklenecek -->
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
